@@ -3,7 +3,7 @@ namespace BuildScripts;
 
 [TaskName("Build Frameworks")]
 [IsDependentOn(typeof(BuildNativeTask))]
-[IsDependentOn(typeof(BuildDesktopVKTask))]
+//[IsDependentOn(typeof(BuildDesktopVKTask))]
 [IsDependentOn(typeof(BuildDesktopGLTask))]
 [IsDependentOn(typeof(BuildWindowsDXTask))]
 [IsDependentOn(typeof(BuildAndroidTask))]
@@ -20,10 +20,10 @@ public sealed class BuildFrameworksTask : FrostingTask<BuildContext> { }
 [IsDependentOn(typeof(BuildMGCBEditorTask))]
 public sealed class BuildToolsTask : FrostingTask<BuildContext> { }
 
-[TaskName("Build Templates")]
-[IsDependentOn(typeof(BuildDotNetTemplatesTask))]
-[IsDependentOn(typeof(BuildVSTemplatesTask))]
-public sealed class BuildTemplatesTask : FrostingTask<BuildContext> { }
+//[TaskName("Build Templates")]
+//[IsDependentOn(typeof(BuildDotNetTemplatesTask))]
+//[IsDependentOn(typeof(BuildVSTemplatesTask))]
+//public sealed class BuildTemplatesTask : FrostingTask<BuildContext> { }
 
 [TaskName("Build All Tests")]
 [IsDependentOn(typeof(BuildTestsTask))]
@@ -34,7 +34,7 @@ public sealed class BuildAllTestsTask : FrostingTask<BuildContext> { }
 [TaskName("Build All")]
 [IsDependentOn(typeof(BuildFrameworksTask))]
 [IsDependentOn(typeof(BuildToolsTask))]
-[IsDependentOn(typeof(BuildTemplatesTask))]
+//[IsDependentOn(typeof(BuildTemplatesTask))]
 [IsDependentOn(typeof(BuildAllTestsTask))]
 public sealed class BuildAllTask : FrostingTask<BuildContext> { }
 
