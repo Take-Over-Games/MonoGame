@@ -19,6 +19,16 @@ namespace Microsoft.Xna.Framework.Input
 		{
             return PlatformGetState();
 		}
+
+        /// <summary>
+        /// Fills the current keyboard state
+        /// </summary>
+        /// <param name="state"></param>
+        public static void GetState(ref KeyboardState state)
+        {
+            state.InternalClearAllKeys();
+            PlatformGetState(ref state);
+        }
 		
         /// <summary>
         /// Returns the current keyboard state for a given player.

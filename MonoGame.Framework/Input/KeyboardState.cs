@@ -186,6 +186,27 @@ namespace Microsoft.Xna.Framework.Input
 
         #region GetPressedKeys()
 
+        public void FillState(List<Keys> keys, bool capsLock = false, bool numLock = false)
+        {
+            InternalClearAllKeys();
+
+            _modifiers = (byte)(0 | (capsLock ? CapsLockModifier : 0) | (numLock ? NumLockModifier : 0));
+
+            if (keys != null)
+                foreach (Keys k in keys)
+                    InternalSetKey(k);
+        }
+
+        public void FillState(Keys[] keys, bool capsLock = false, bool numLock = false)
+        {
+            InternalClearAllKeys();
+
+            _modifiers = (byte)(0 | (capsLock ? CapsLockModifier : 0) | (numLock ? NumLockModifier : 0));
+
+            if (keys != null)
+                foreach (Keys k in keys)
+                    InternalSetKey(k);
+        }
         /// <summary>
         /// Returns the number of pressed keys in this <see cref="KeyboardState"/>.
         /// </summary>

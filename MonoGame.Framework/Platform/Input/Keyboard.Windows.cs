@@ -35,6 +35,25 @@ namespace Microsoft.Xna.Framework.Input
             DefinedKeyCodes = keyCodes.ToArray();
         }
 
+        private static void PlatformGetState(ref KeyboardState state)
+        {
+            if (_isActive && GetKeyboardState(_keyState))
+            {
+                _keys.RemoveAll(IsKeyReleasedPredicate);
+
+                foreach (var keyCode in DefinedKeyCodes)
+                {
+                    if (IsKeyReleased(keyCode))
+                        continue;
+                    var key = (Keys)keyCode;
+                    if (!_keys.Contains(key))
+                        _keys.Add(key);
+                }
+            }
+
+            state.FillState(_keys, Console.CapsLock, Console.NumberLock);
+        }
+
         private static KeyboardState PlatformGetState()
         {
             if (_isActive && GetKeyboardState(_keyState))
