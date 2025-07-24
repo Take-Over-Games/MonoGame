@@ -2,23 +2,35 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
-using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace MonoGame.Framework
 {
     class WinFormsGamePlatform : GamePlatform
     {
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr SetWindowPos(IntPtr hWndChild, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
+
         //internal static string LaunchParameters;
 
         private WinFormsGameWindow _window;
 
-        public WinFormsGamePlatform(Game game)
+        public WinFormsGamePlatform(Game game, nint parentWindow = 0)
             : base(game)
         {
             _window = new WinFormsGameWindow(this);
+
+            if (parentWindow != 0)
+            {
+                SetParent(_window.Handle, parentWindow);
+            }
 
             Window = _window;
         }
@@ -53,6 +65,8 @@ namespace MonoGame.Framework
                 var pp = Game.GraphicsDevice.PresentationParameters;
                 _window.Initialize(pp);
             }
+
+            SetWindowPos(_window.Handle, 0, 0, 0, 800, 600, 0x0040);
         }
 
         public override void RunLoop()
@@ -64,7 +78,7 @@ namespace MonoGame.Framework
         {
             throw new NotSupportedException("The Windows platform does not support asynchronous run loops");
         }
-        
+
         public override void Exit()
         {
             if (_window != null)
@@ -117,10 +131,10 @@ namespace MonoGame.Framework
         public override void Present()
         {
             var device = Game.GraphicsDevice;
-            if ( device != null )
+            if (device != null)
                 device.Present();
         }
-		
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

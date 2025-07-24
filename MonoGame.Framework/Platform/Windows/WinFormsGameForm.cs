@@ -33,7 +33,7 @@ namespace Microsoft.Xna.Framework.Windows
     }
 
     [System.ComponentModel.DesignerCategory("Code")]
-    internal class WinFormsGameForm : Form
+    public class WinFormsGameForm : Form
     {
         private readonly WinFormsGameWindow _window;
 

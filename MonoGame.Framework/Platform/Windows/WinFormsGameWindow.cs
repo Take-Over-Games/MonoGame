@@ -22,9 +22,9 @@ using XnaPoint = Microsoft.Xna.Framework.Point;
 
 namespace MonoGame.Framework
 {
-    class WinFormsGameWindow : GameWindow, IDisposable
+    public class WinFormsGameWindow : GameWindow, IDisposable
     {
-        internal WinFormsGameForm Form;
+        public WinFormsGameForm Form;
 
         static private ReaderWriterLockSlim _allWindowsReaderWriterLockSlim = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
         static private List<WinFormsGameWindow> _allWindows = new List<WinFormsGameWindow>();

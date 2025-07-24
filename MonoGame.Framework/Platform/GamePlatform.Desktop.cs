@@ -8,12 +8,12 @@ namespace Microsoft.Xna.Framework
 {
     partial class GamePlatform
     {
-        internal static GamePlatform PlatformCreate(Game game)
+        internal static GamePlatform PlatformCreate(Game game, nint parentWindow = 0)
         {
 #if DESKTOPGL || ANGLE
             return new SdlGamePlatform(game);
 #elif WINDOWS && DIRECTX
-            return new MonoGame.Framework.WinFormsGamePlatform(game);
+            return new MonoGame.Framework.WinFormsGamePlatform(game, parentWindow);
 #endif
         }
    }

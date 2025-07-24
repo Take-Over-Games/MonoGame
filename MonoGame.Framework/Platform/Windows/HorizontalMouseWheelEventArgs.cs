@@ -2,7 +2,7 @@
 
 namespace Microsoft.Xna.Framework.Windows
 {
-    internal class HorizontalMouseWheelEventArgs : EventArgs
+    public class HorizontalMouseWheelEventArgs : EventArgs
     {
         internal int Delta { get; private set; }
 

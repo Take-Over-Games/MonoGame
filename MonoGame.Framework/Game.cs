@@ -61,7 +61,7 @@ namespace Microsoft.Xna.Framework
         /// <summary>
         /// Create a <see cref="Game"/>.
         /// </summary>
-        public Game()
+        public Game(nint parentWindow = 0)
         {
             _instance = this;
 
@@ -70,7 +70,7 @@ namespace Microsoft.Xna.Framework
             _components = new GameComponentCollection();
             _content = new ContentManager(_services);
 
-            Platform = GamePlatform.PlatformCreate(this);
+            Platform = GamePlatform.PlatformCreate(this, parentWindow);
             Platform.Activated += OnActivated;
             Platform.Deactivated += OnDeactivated;
             _services.AddService(typeof(GamePlatform), Platform);
