@@ -2,6 +2,7 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using System;
 using System.Collections.Generic;
 
 namespace Microsoft.Xna.Framework.Input
@@ -16,6 +17,14 @@ namespace Microsoft.Xna.Framework.Input
             return new KeyboardState(_keys,
                                      (modifiers & Sdl.Keyboard.Keymod.CapsLock) == Sdl.Keyboard.Keymod.CapsLock,
                                      (modifiers & Sdl.Keyboard.Keymod.NumLock) == Sdl.Keyboard.Keymod.NumLock);
+        }
+
+        private static void PlatformGetState(ref KeyboardState state)
+        {
+            var modifiers = Sdl.Keyboard.GetModState();
+            state.FillState(_keys,
+                            (modifiers & Sdl.Keyboard.Keymod.CapsLock) == Sdl.Keyboard.Keymod.CapsLock,
+                            (modifiers & Sdl.Keyboard.Keymod.NumLock) == Sdl.Keyboard.Keymod.NumLock);
         }
 
         internal static void SetKeys(List<Keys> keys)
