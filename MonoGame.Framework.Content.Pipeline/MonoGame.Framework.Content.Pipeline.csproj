@@ -125,6 +125,10 @@
     <Exec Command="msbuild pipeline.sln /p:Configuration=$(Configuration) /p:Platform=x64" WorkingDirectory="../native/pipeline/" />
   </Target>
 
+  <Target Name="CopyMGCPW" AfterTargets="BuildMGCPW">
+    <Copy SourceFiles="..\Artifacts\native\mgpipeline\windows\$(Configuration)\mgpipeline.dll" DestinationFolder="..\Artifacts\MonoGame.Content.Builder\Release\" SkipUnchangedFiles="true" />
+  </Target>
+
   <Target Name="BuildMGCPU" Condition="'$(DisableNativeBuild)' != 'True' and '$(OS)' != 'Windows_NT'" BeforeTargets="CollectPackageReferences">
     <Exec Command="premake5 gmake" WorkingDirectory="../native/pipeline/" />
     <Exec Command="make config=$(Configuration.ToLower())" WorkingDirectory="../native/pipeline/" />
